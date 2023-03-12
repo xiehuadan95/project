@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!--上下文名称-->
+    <contextName>comatguiguSrb</contextName>
+    <!--用来定义全局变量 有两个属性 name:变量名称  value是变量的值 日志输出目录-->
+    <property name="log.path" value="D:/WorkSpace/log/srb_log"/>
+    <!--控制台日志格式：彩色日志  magenta:洋红 boldMagenta 粗红 cyan 青色 white白色  -->
+    <!--日期用黄色，日志级别高亮同时都占5个字符 这样可以对齐，日志记录器的名字在哪个类输出 绿色文字 ，显示日志输出的消息 %n为换行-->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%yellow(%date{yyyy-MM-dd HH:mm:ss}[srb]) %highlight([%-5level]) %green(%logger·) %msg%n"/>
+
+    <!--文件日志格式         在哪个线程，哪个文件，哪行，哪个类-->
+    <property name="FILE_LOG_PATTERN"
+              value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n"/>
+    <!--编码-->
+    <property name="ENCODING" value="UTF-8"/>
+    <!--负责写日志的节点appender-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>${ENCODING}</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文件日志-->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${log.path}/log.log</file>
+        <!--每次都追加日志-->
+        <append>true</append>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${ENCODING}</charset>
+        </encoder>
+    </appender>
+    <!-- 滚动日志节点 防止未来日志越来越多 -->
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--区别其他appender的文件名字-->
+        <file>${log.path}/log-rolling.log</file>
+        <!--日志输出的格式及编码方案-->
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${ENCODING}</charset>
+        </encoder>
+        <!--设置滚动日志记录的滚动策略   基于时间的滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志归档路径及格式 会基于时间每天的日志 归档到 以下路径的文件中去- .%i是占位符-->
+            <fileNamePattern>${log.path}/info/log-rolling-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--归档日志文件保留的最大数量 这里是15天 共15份-->
+            <maxHistory>15</maxHistory>
+            <!--设置触发滚动的时机 如果这天日志特别大超过规定大小 就再生成一个文件 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+<!--    <appender name="rms" class="org.apache.log4j.DailyRollingFileAppender">-->
+<!--        <param name="File" value = "E:/logTest/rpc-server-stat.log"/>-->
+<!--        <param name = "Encoding" value="DEBUG"/>-->
+<!--        <param name="Threshold" value="DEBUG"/>-->
+<!--        <param name="Append" value="true"/>-->
+<!--        <param name="keyPath" value="context?immuneChannelid"/>-->
+<!--        <param name="uniqueFlowNo" value="context?UniqueFlowNo"/>-->
+<!--        <param name="datePattern" value="yyyy_MM_dd"/>-->
+<!--        <layout class="org.apache.log4j.PatternLayout">-->
+<!--            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS},NVS-ALL-INVOKERS,[联网核查appname],%c,%M,1,%r,[成功失败]，F - %m%n"/>-->
+<!--        </layout>-->
+<!--    </appender>-->
+
+
+
+    <!--日志记录器 管理整个com.xie包下的日志 -->
+    <!--    <logger name="com.xie" level="INFO">-->
+    <!--        &lt;!&ndash; 引用 日志记录的目标位置 往两个地方输出位置&ndash;&gt;-->
+    <!--        <appender-ref ref="CONSOLE"/>-->
+    <!--        <appender-ref ref="FILE"/>-->
+    <!--    </logger>-->
+    <!--  多环境配置 生产 测试 环境名字与yml配置文件中的一致-->
+    <springProfile name="dev,test">
+        <logger name="com.atguigu" level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ROLLING_FILE"/>
+<!--            <appender-ref ref="rms"/>-->
+        </logger>
+    </springProfile>
+    <!--生产环境-->
+    <springProfile name="prod">
+        <logger name="com.atguigu" level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+        </logger>
+    </springProfile>
+
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
