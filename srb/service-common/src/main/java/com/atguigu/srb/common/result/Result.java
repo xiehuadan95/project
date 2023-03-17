@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 public class Result {
-    private Integer cod;
+    private Integer code;
     private String message;
     private Map<String,Object> data=new HashMap<>();
     /**
@@ -22,7 +22,7 @@ public class Result {
     //通过静态方法调用，生成对象
     public static Result ok(){
         Result result = new Result();
-        result.setCod(ResponseEnum.SUCCESS.getCode());
+        result.setCode(ResponseEnum.SUCCESS.getCode());
         result.setMessage(ResponseEnum.SUCCESS.getMsg());
         return result;
     }
@@ -32,7 +32,7 @@ public class Result {
      */
      public static Result error(){
          Result result = new Result();
-         result.setCod(ResponseEnum.ERROR.getCode());
+         result.setCode(ResponseEnum.ERROR.getCode());
          result.setMessage(ResponseEnum.ERROR.getMsg());
          return result;
      }
@@ -44,7 +44,7 @@ public class Result {
      */
      public static Result setResult(ResponseEnum responseEnum){
          Result result = new Result();
-         result.setCod(responseEnum.getCode());
+         result.setCode(responseEnum.getCode());
          result.setMessage(responseEnum.getMsg());
          return result;
      }
@@ -79,7 +79,7 @@ public class Result {
      * @return
      */
     public Result cod(Integer cod){
-        this.setCod(cod);
+        this.setCode(cod);
         return this;
     }
 
