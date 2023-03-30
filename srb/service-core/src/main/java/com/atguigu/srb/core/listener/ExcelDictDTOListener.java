@@ -53,7 +53,7 @@ public class ExcelDictDTOListener extends AnalysisEventListener<ExcelDictDTO> {
     private void saveData() {
         log.info("{}条数据被存储到数据库", list.size());
         //TODO 存数据库
-//        dictMapper.insertBatch(list);
+        dictMapper.insertBatch(list);
         log.info("{}条数据存储到数据库成功!", list.size());
     }
 }
