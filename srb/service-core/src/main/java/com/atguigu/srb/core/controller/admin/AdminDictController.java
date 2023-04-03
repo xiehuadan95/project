@@ -64,7 +64,7 @@ public class AdminDictController {
         //设置附件的形式下载到本地
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         //写数据列表 data() 可以在业务层创建方法 返回数据列表
-//        EasyExcel.write(response.getOutputStream(), ExcelDictDTO.class).sheet("数据字典").doWrite(dictService.listDictData());
+        EasyExcel.write(response.getOutputStream(), ExcelDictDTO.class).sheet("数据字典").doWrite(dictService.listDictData());
     }
 
     /**

@@ -8,12 +8,15 @@ import com.atguigu.srb.core.mapper.DictMapper;
 import com.atguigu.srb.core.service.DictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -36,5 +39,19 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     public void importExcel(InputStream inputStream) {
         EasyExcel.read(inputStream, ExcelDictDTO.class,new ExcelDictDTOListener(dictMapper)).sheet().doRead();
         log.info("Excel导入完成======");
+    }
+
+    @Override
+    public List<ExcelDictDTO> listDictData() {
+        List<Dict> dictList = baseMapper.selectList(null);
+        //创建excelDictDTO列表，将DICT列表转换为excelDTO列表
+        //创建一个 一样长度的列表
+        ArrayList<ExcelDictDTO> excelDictDTOList = new ArrayList<>(dictList.size());
+        dictList.forEach(dict -> {
+            ExcelDictDTO excelDictDTO = new ExcelDictDTO();
+            BeanUtils.copyProperties(dict,excelDictDTO);
+            excelDictDTOList.add(excelDictDTO);
+        });
+        return excelDictDTOList;
     }
 }
