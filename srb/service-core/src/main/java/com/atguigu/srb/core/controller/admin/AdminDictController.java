@@ -6,6 +6,7 @@ import com.atguigu.srb.common.exec.BusinessException;
 import com.atguigu.srb.common.result.ResponseEnum;
 import com.atguigu.srb.common.result.Result;
 import com.atguigu.srb.core.pojo.dto.ExcelDictDTO;
+import com.atguigu.srb.core.pojo.entity.Dict;
 import com.atguigu.srb.core.service.DictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,7 +69,7 @@ public class AdminDictController {
     }
 
     /**
-     * 延迟加载
+     * 延迟加载  根据父类别id加载
      * 不需要后端返回数据中心包含嵌套数据，并且要定义布尔属性hasChildren表示当前节点是否包含子数据
      * 如果hasChildren为true，就表示当前节点包含子数据
      * 如果hasChildren为false，就表示当前节点不包含子数据
@@ -78,9 +79,8 @@ public class AdminDictController {
     @GetMapping("/listByParentId/{parent}")
     public Result listByParentId(@ApiParam(value = "上级节点id", required = true)
                                  @PathVariable("parent") Long parentId) {
-//        List<Dict> dictList = dictService.listByParentId(parentId);
-//        return Result.ok().data("list", dictList);
-        return null;
+        List<Dict> dictList = dictService.listByParentId(parentId);
+        return Result.ok().data("list", dictList);
     }
 
 
