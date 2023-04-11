@@ -4,7 +4,7 @@
     <!--上下文名称-->
     <contextName>comatguiguSrb</contextName>
     <!--用来定义全局变量 有两个属性 name:变量名称  value是变量的值 日志输出目录-->
-    <property name="log.path" value="D:/WorkSpace/log/srb_log/core"/>
+    <property name="log.path" value="D:/WorkSpace/log/srb_log/sms"/>
     <!--控制台日志格式：彩色日志  magenta:洋红 boldMagenta 粗红 cyan 青色 white白色  -->
     <!--日期用黄色，日志级别高亮同时都占5个字符 这样可以对齐，日志记录器的名字在哪个类输出 绿色文字 ，显示日志输出的消息 %n为换行-->
     <property name="CONSOLE_LOG_PATTERN"
