@@ -41,6 +41,7 @@ public class UnifiedExceptionHandler {
     //处理自定义异常的 处理方法
     @ExceptionHandler(value=BusinessException.class)
     public Result handleException(BusinessException e){
+        //打印了错误跟踪栈
         log.error(e.getMessage(),e);
         return Result.error().msg(e.getMessage()).cod(e.getCode());
     }
