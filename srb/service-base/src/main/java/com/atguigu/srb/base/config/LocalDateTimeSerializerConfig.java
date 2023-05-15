@@ -13,7 +13,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * Author:Eric
  * DATE:2023/2/25-11:37
- * Decription: 对时间日期格式的配置化 localDateTime  仅用于这种数据类型
+ * Decription: 对时间日期格式的配置化 localDateTime  仅用于这种数据类型 序列化配置
+ * entity序列化的时候 这个时间类数据 最终输出都是这样输出
  */
 @Configuration
 public class LocalDateTimeSerializerConfig {
