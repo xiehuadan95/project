@@ -5,6 +5,7 @@ import com.atguigu.srb.common.result.ResponseEnum;
 import com.atguigu.srb.common.result.Result;
 import com.atguigu.srb.common.util.RandomUtils;
 import com.atguigu.srb.common.util.RegexValidateUtils;
+import com.atguigu.srb.sms.client.CoreUserInfoClient;
 import com.atguigu.srb.sms.service.SmsService;
 import com.atguigu.srb.sms.util.SmsProperties;
 import io.swagger.annotations.Api;
@@ -35,6 +36,9 @@ public class ApiSmsController {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @Resource
+    private CoreUserInfoClient coreUserInfoClient;
+
     @ApiOperation("获取验证码")
     @GetMapping("/send/{mobile}")
     public Result send(
@@ -47,7 +51,9 @@ public class ApiSmsController {
         Assert.isTrue(RegexValidateUtils.checkCellphone(mobile),ResponseEnum.MOBILE_ERROR);
 
         //判断手机号是否已经注册 需要 用service-core 查询userinfo这个实体
-
+        Boolean res = coreUserInfoClient.checkMobile(mobile);
+        Assert.isTrue(res == false,ResponseEnum.MOBILE_EXIST_ERROR);
+        log.info("手机号是否已被注册:"+res);
 
 
         HashMap<String, Object> map = new HashMap<>();
