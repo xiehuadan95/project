@@ -48,5 +48,10 @@
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt</artifactId>
     </dependency>
+<!-- 服务发现依赖 所有的微服务模块都需要-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    </dependency>
 </dependencies>
 </project>

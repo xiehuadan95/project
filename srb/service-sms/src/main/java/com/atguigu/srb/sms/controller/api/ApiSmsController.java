@@ -45,6 +45,11 @@ public class ApiSmsController {
         Assert.notEmpty(mobile, ResponseEnum.MOBILE_NULL_ERROR);
         //合法性
         Assert.isTrue(RegexValidateUtils.checkCellphone(mobile),ResponseEnum.MOBILE_ERROR);
+
+        //判断手机号是否已经注册 需要 用service-core 查询userinfo这个实体
+
+
+
         HashMap<String, Object> map = new HashMap<>();
         //生成了一个4位随机数
         String code =RandomUtils.getFourBitRandom();
