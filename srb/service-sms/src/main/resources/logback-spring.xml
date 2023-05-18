@@ -77,7 +77,7 @@
     <!--    </logger>-->
     <!--  多环境配置 生产 测试 环境名字与yml配置文件中的一致-->
     <springProfile name="dev,test">
-        <logger name="com.atguigu" level="INFO">
+        <logger name="com.atguigu" level="DEBUG">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="ROLLING_FILE"/>
 <!--            <appender-ref ref="rms"/>-->

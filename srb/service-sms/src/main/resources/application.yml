@@ -16,7 +16,7 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848  #nacos服务地址
-# redis放在spring节点下
+  # redis放在spring节点下
   redis:
     host: 127.0.0.1
     port: 6379
@@ -37,7 +37,13 @@ aliyun:
     key-secret: key-secret
     template-code: duanxin-template
     sign-name: duanxin-template-sign
-
-
+feign:
+  client:
+    default-config:
+      connectTimeout: 10000 # 连接超时配置
+      readTimeout: 60000  #执行超时配置
+logging:
+  level:
+    com.atguigu.srb.sms.client.CoreUserInfoClient: DEBUG  #以什么级别监控哪个接口 这里是监控feign 调用日志
 
 
