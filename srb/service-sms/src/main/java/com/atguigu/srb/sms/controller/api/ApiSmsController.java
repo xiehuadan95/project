@@ -51,6 +51,7 @@ public class ApiSmsController {
         Assert.isTrue(RegexValidateUtils.checkCellphone(mobile),ResponseEnum.MOBILE_ERROR);
 
         //判断手机号是否已经注册 需要 用service-core 查询userinfo这个实体
+        //如果服务熔断，这里的这个功能进行降级
         Boolean res = coreUserInfoClient.checkMobile(mobile);
         Assert.isTrue(res == false,ResponseEnum.MOBILE_EXIST_ERROR);
         log.info("手机号是否已被注册:"+res);

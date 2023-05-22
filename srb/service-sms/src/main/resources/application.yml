@@ -42,6 +42,8 @@ feign:
     default-config:
       connectTimeout: 10000 # 连接超时配置
       readTimeout: 60000  #执行超时配置
+  sentinel:   # 开启feign 对sentinel的支持
+    enabled: true
 logging:
   level:
     com.atguigu.srb.sms.client.CoreUserInfoClient: DEBUG  #以什么级别监控哪个接口 这里是监控feign 调用日志
