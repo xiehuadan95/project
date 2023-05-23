@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/core/userLoginRecord")
 @Slf4j
-@CrossOrigin //网关层有进行跨域过滤器的配置
+//@CrossOrigin //网关层有进行跨域过滤器的配置
 public class AdminUserLoginRecordController {
 
     @Resource

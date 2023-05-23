@@ -1,0 +1,29 @@
+server:
+  port: 80   # 用其代替nginx
+spring:
+  profiles:
+    active: dev
+  application:
+    # 以后要注册到微服务中 起一个 服务名
+    name: service-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  #nacos服务地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true # gateway可以发现nacos中的微服务 并自动生成转发路由
+      routes:                      #网关路由配置
+        - id: service-core
+          uri: lb://service-core   #如果有多个实例 会已负载均衡的方式去访问
+          predicates:              #具体的路径策略
+            - Path=/*/core/**
+        - id: service-sms
+          uri: lb://service-sms
+          predicates:
+            - Path=/*/sms/**
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/*/oss/**

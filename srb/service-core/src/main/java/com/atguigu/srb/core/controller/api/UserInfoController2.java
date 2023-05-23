@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/api/core/userInfo")
 @Slf4j
-@CrossOrigin
+//@CrossOrigin
 public class UserInfoController2 {
     //
 //    @Resource

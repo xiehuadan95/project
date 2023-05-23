@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Api(tags = "积分等级管理")
 //跨域
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @Slf4j
 @RequestMapping("/admin/core/integralGrade")
