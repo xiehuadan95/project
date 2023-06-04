@@ -11,8 +11,14 @@
     <groupId>com.xie</groupId>
     <artifactId>study</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>study</name>
     <description>study</description>
+    <modules>
+
+        <module>studyDaily</module>
+        <module>websocket</module>
+    </modules>
     <properties>
         <java.version>17</java.version>
     </properties>

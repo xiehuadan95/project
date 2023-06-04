@@ -9,6 +9,10 @@
     <artifactId>service-core</artifactId>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-websocket</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.atguigu</groupId>
             <artifactId>service-base</artifactId>
